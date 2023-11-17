@@ -14,22 +14,20 @@ export default function Home() {
       email: '',
     })
     const [addDiv, setAddDiv] = useState([{divs:"", id:100}])
+   
+    
 
     const {name,email} = formData;
 
-    const sensors = useSensors( useSensor(MouseSensor, {
+    const sensors = useSensors( useSensor(MouseSensor,{
       // Require the mouse to move by 10 pixels before activating
       activationConstraint: {
         distance: 10,
       },})
     )
-    
   
-    
-
-    const questions= []
-
-    const myId = 1000;
+    //For warning in console
+    const myId = 1000
 
     //For handling name and email fields
     function handleText(e){
@@ -40,12 +38,7 @@ export default function Home() {
       })
     }
 
-    //For creating new question fields
-    function handleClick(){ 
-        setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100)}])
-      }
-
-    function handleDragStart(e){
+     function handleDragStart(e){
       console.log("Started",e)
     }
 
@@ -55,7 +48,6 @@ export default function Home() {
       if(e.active.data.current?.sortable.containerId !== e.over?.data.current?.sortable.containerId) return
 
       setAddDiv((items) => {
-        const temp = {...addDiv}
         const oldIdx = e.active.data.current.sortable.index
         const newIdx = e.over?.data.current?.sortable.index
         console.log('Index:', oldIdx, newIdx)
@@ -111,7 +103,11 @@ export default function Home() {
       {addDiv.map((singleDiv, index)=> 
        ( 
        
-       <QuestionForm key={addDiv[index].id}  handleClick={handleClick} addDiv={addDiv} index={index} questions={questions} />
+       <QuestionForm key={addDiv[index].id}  
+                     index={index} 
+                     addDiv={addDiv}
+                     setAddDiv = {setAddDiv}
+       />
       
        )
        )}
