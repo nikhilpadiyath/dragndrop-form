@@ -13,11 +13,14 @@ export default function Home() {
       name: '',
       email: '',
     })
-    const [addDiv, setAddDiv] = useState([{divs:"", id:100}])
-    const [showDiv, setShowDiv] = useState(false)
-   
-    
 
+    const [num,setNum] = useState(1)
+    const [showOptions, setShowOptions] = useState(false)
+    const [addDiv, setAddDiv] = useState([{divs:"", id:100, p: num, optionStatus: showOptions}])
+    const [showDiv, setShowDiv] = useState(false)
+    const [value,setValue] = useState('')
+
+    
     const {name,email} = formData;
 
     const sensors = useSensors( useSensor(MouseSensor,{
@@ -26,7 +29,18 @@ export default function Home() {
         distance: 10,
       },})
     )
+
+    
+
+  const options = [
+    {label:"Text", value: 1},
+    {label:"Number", value: 2},
+    {label:"Checkbox", value: 3},
+    {label:"Single-select", value: 4},
+    {label:"Multiple-select",value: 5}
+  ]
   
+  let qList = []
     //For warning in console
     const myId = 1000
 
@@ -39,9 +53,37 @@ export default function Home() {
       })
     }
 
+    //Get Question
+    const getQuestion = (data) => {
+      qList.push(data)
+      }
+
+    //For handling dropdown list
+   function handleSelect(e,index){
+    setValue(e.target.value)
+
+    if(e.target.value === '3' || e.target.value === '4' || e.target.value === '5'){
+      setShowOptions(true)
+    } else {
+      setShowOptions(false)
+    }
+    console.log(addDiv)
+  }
+
+     //For creating new question fields
+  function handleClick(){ 
+    setNum(num+1)
+   
+    setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100),p: num+1, optionStatus:showOptions}])  
+    }
+
+
+
     function handleFirst(){
         setShowDiv(true)
     }
+
+    //*.........Drag and Drop functions............*
 
      function handleDragStart(e){
       console.log("Started",e)
@@ -113,7 +155,13 @@ export default function Home() {
        <QuestionForm key={addDiv[index].id}  
                      index={index} 
                      addDiv={addDiv}
-                     setAddDiv = {setAddDiv}
+                     handleClick= {handleClick}
+                     num= {num}
+                     options= {options}
+                     handleSelect = {handleSelect} 
+                     value = {value}
+                     getQuestion = {getQuestion}
+                     showOptions = {showOptions}
        />
       
        )
