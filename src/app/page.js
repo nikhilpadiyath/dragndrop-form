@@ -14,6 +14,7 @@ export default function Home() {
       email: '',
     })
     const [addDiv, setAddDiv] = useState([{divs:"", id:100}])
+    const [showDiv, setShowDiv] = useState(false)
    
     
 
@@ -36,6 +37,10 @@ export default function Home() {
         ...formData,
         [e.target.name]: value
       })
+    }
+
+    function handleFirst(){
+        setShowDiv(true)
     }
 
      function handleDragStart(e){
@@ -67,8 +72,8 @@ export default function Home() {
           >
     <div className="flex min-h-screen flex-col items-center p-10">
        <div className="flex flex-col items-center">
-          <h1 className="text-4xl pb-10 font-bold ml-8 text-green-700">Samskara</h1>
-          <h1 className="text-2xl pb-10 font-bold ml-8">Create a new Event</h1>
+          <h1 className="text-4xl pb-6 font-bold text-green-700">Samskara</h1>
+          <h1 className="text-2xl pb-6 font-bold ">Create a new Event</h1>
         <div className="flex">
         <div className="p-2">
         <label htmlFor="name">Name:  </label>
@@ -95,10 +100,12 @@ export default function Home() {
         </div>
        </div>
 
-            <div className=" w-full">
+            <div className=" w-full flex flex-col items-center">
       <p className="p-2 m-2 font-semibold font-serif text-center">Feel free to add some additional questions to our participants!!!</p>
-      
+      <button onClick={handleFirst} className={showDiv ? "hidden" : "bg-slate-800 text-white h-1/4 w-1/3 rounded-md"}>Add your questions</button>
+
       <SortableContext items={addDiv} strategy={verticalListSortingStrategy}>
+      {showDiv && (
       <div className="min-h-full">
       {addDiv.map((singleDiv, index)=> 
        ( 
@@ -112,6 +119,7 @@ export default function Home() {
        )
        )}
        </div>
+       )}
        </SortableContext> 
        </div>
       </div>
