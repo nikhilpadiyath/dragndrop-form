@@ -38,7 +38,7 @@ const QuestionForm = ({index, addDiv,handleClick, options, handleSelect, getQues
       
       
     <div 
-         className="w-full p-4 m-2 bg-slate-300 rounded-xl text-sm"
+         className="w-full p-4 m-2 bg-slate-300 rounded-xl text-sm dark:text-slate-800"
          >
         <div className="sm:flex sm:flex-col"> 
         <label htmlFor="question" className="font-serif">Question:  </label>
@@ -60,8 +60,8 @@ const QuestionForm = ({index, addDiv,handleClick, options, handleSelect, getQues
         </select>
         {showOptions && (
         <div>
-          <h3>Options</h3>
-          <input type='text' name='options'/>
+          <h3 className="font-serif">Options: </h3>
+          <input className="rounded sm:w-3/4" type='text' name='options'/>
         </div>
         )}
                    
