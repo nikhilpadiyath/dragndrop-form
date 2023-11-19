@@ -24,7 +24,7 @@ const QuestionForm = ({index, addDiv,handleClick, options, handleSelect, getQues
     if(isDragging){
       return <div ref={setNodeRef} 
                   style={style}
-                  className="w-5/6 h-3/4 p-4 m-2 bg-slate-300 opacity-60 border-2 border-rose-500 rounded-xl text-sm dark:text-slate-800"
+                  className="w-5/6 h-3/4 p-4 m-2 bg-slate-300 touch-none opacity-60 border-2 border-rose-700 rounded-xl text-sm dark:text-slate-800"
                   ></div>
     }
 
@@ -46,14 +46,14 @@ const QuestionForm = ({index, addDiv,handleClick, options, handleSelect, getQues
       
       
     <div 
-         className="w-full p-4 m-2 bg-slate-300 hover:bg-slate-400 rounded-xl text-sm dark:text-slate-800"
+         className="w-full p-4 m-2 bg-slate-300 hover:bg-slate-400 hover:border-2 hover:border-rose-600 rounded-xl text-sm dark:text-slate-800 touch-none"
          >
         <div className="sm:flex sm:flex-col"> 
         <div className="flex flex-row justify-end text-lg hover:text-red-600 hover:text-bold">
         <button type="button" onClick={() => handleDelete(index)}>X</button>
         </div>
         <label htmlFor="question" className="font-serif">Question:  </label>
-        <input className="rounded-lg w-1/2 mt-2 sm:w-4/5"  
+        <input className="rounded-lg w-1/2 mt-2 sm:w-4/5 p-2"  
                type="text" 
                name="question"  
                placeholder= {`Question ${addDiv[index].p}`}
@@ -78,7 +78,7 @@ const QuestionForm = ({index, addDiv,handleClick, options, handleSelect, getQues
                    
         {addDiv.length-1 === index &&
         (<button type='button' 
-                  className="bg-slate-800 m-5 w-40 rounded-lg text-white text-sm sm:text-center" 
+                  className="bg-slate-800 m-5 w-40 rounded-lg text-white text-sm sm:text-center hover:border-2 hover:border-rose-600" 
                   onClick={function(event){
                                         handleClick();
                                         getQuestion();
