@@ -194,14 +194,14 @@ export default function Home() {
        </SortableContext> 
        </div>
       </div>
-      {createPortal(
+     {/*} {createPortal(
         <DragOverlay>
           {activeDiv && (
             <QuestionForm />
           )}
         </DragOverlay>,
         document.body
-      )}
+          )}*/}
       </DndContext>
     
   )
