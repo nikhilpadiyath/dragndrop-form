@@ -2,10 +2,13 @@
 import { useState } from 'react'
 import QuestionForm from './components/QuestionForm'
 import { DndContext,
+        DragOverlay,
         MouseSensor,
+        TouchSensor,
         useSensor,
         useSensors,} from '@dnd-kit/core'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { createPortal } from 'react-dom'
 
 export default function Home() {
 
@@ -17,6 +20,7 @@ export default function Home() {
     const [num,setNum] = useState(1)
     const [showOptions, setShowOptions] = useState(false)
     const [addDiv, setAddDiv] = useState([{divs:"", id:100, p: num, optionStatus: showOptions}])
+    const [activeDiv, setActiveDiv] = useState(null)
     const [showDiv, setShowDiv] = useState(false)
     const [value,setValue] = useState('')
 
@@ -27,7 +31,13 @@ export default function Home() {
       // Require the mouse to move by 10 pixels before activating
       activationConstraint: {
         distance: 10,
-      },})
+      },}),
+      useSensor(TouchSensor,{
+        // Require the mouse to move by 10 pixels before activating
+        activationConstraint: {
+          delay: 250,
+          tolerance: 5,
+        },})
     )
 
     
@@ -77,16 +87,28 @@ export default function Home() {
     setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100),p: num+1, optionStatus:showOptions}])  
     }
 
-
-
+    //To show the question panel
     function handleFirst(){
         setShowDiv(true)
     }
 
+  const handleDelete =(index) => {
+    console.log(index)
+    let currentId = addDiv[index].id
+    console.log(currentId)
+    const newList = addDiv.filter(item => item.id !== currentId)
+    //newList.splice(index,1)
+    setAddDiv(newList)
+  }
+
     //*.........Drag and Drop functions............*
 
      function handleDragStart(e){
-      console.log("Started",e)
+      console.log(e)
+      if(e.active.data.current?.type === "Question"){
+        setActiveDiv(e.active.data.current.column)
+        return
+      }
     }
 
     function handleDragEnd(e){
@@ -119,7 +141,7 @@ export default function Home() {
         <div className="flex">
         <div className="p-2">
         <label htmlFor="name">Name:  </label>
-        <input className="rounded-lg w-full"  
+        <input className="rounded-lg w-full p-2"  
                type="text" 
                name="name"  
                placeholder="Enter your name"
@@ -130,7 +152,7 @@ export default function Home() {
         </div>
         <div className="p-2 w-500">
         <label htmlFor="email">Email:  </label>
-        <input className="rounded-lg w-full" 
+        <input className="rounded-lg w-full p-2" 
                type="email" 
                name="email"  
                placeholder="Enter your email"
@@ -162,6 +184,7 @@ export default function Home() {
                      value = {value}
                      getQuestion = {getQuestion}
                      showOptions = {showOptions}
+                     handleDelete={handleDelete}
        />
       
        )
@@ -171,6 +194,14 @@ export default function Home() {
        </SortableContext> 
        </div>
       </div>
+      {createPortal(
+        <DragOverlay>
+          {activeDiv && (
+            <QuestionForm />
+          )}
+        </DragOverlay>,
+        document.body
+      )}
       </DndContext>
     
   )

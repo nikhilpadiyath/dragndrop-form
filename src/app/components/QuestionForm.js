@@ -2,13 +2,14 @@
 import {CSS} from '@dnd-kit/utilities'
 import { useSortable } from '@dnd-kit/sortable'
 import { useState } from 'react'
-const QuestionForm = ({index, addDiv,handleClick, options, handleSelect, getQuestion, showOptions}) => {
+const QuestionForm = ({index, addDiv,handleClick, options, handleSelect, getQuestion, showOptions, handleDelete}) => {
 
   const [question, setQuestion] = useState("")
   
    const { attributes, 
             listeners, 
-            setNodeRef, 
+            setNodeRef,
+            isDragging, 
             transform, 
             transition 
           } = useSortable({id: addDiv[index].id,
@@ -19,6 +20,13 @@ const QuestionForm = ({index, addDiv,handleClick, options, handleSelect, getQues
     const style = { transform: CSS.Transform.toString(transform),
                     transition
                   }
+
+    if(isDragging){
+      return <div ref={setNodeRef} 
+                  style={style}
+                  className="w-5/6 h-3/4 p-4 m-2 bg-slate-300 opacity-60 border-2 border-rose-500 rounded-xl text-sm dark:text-slate-800"
+                  ></div>
+    }
 
   
  //For handling text in question fields
@@ -38,9 +46,12 @@ const QuestionForm = ({index, addDiv,handleClick, options, handleSelect, getQues
       
       
     <div 
-         className="w-full p-4 m-2 bg-slate-300 rounded-xl text-sm dark:text-slate-800"
+         className="w-full p-4 m-2 bg-slate-300 hover:bg-slate-400 rounded-xl text-sm dark:text-slate-800"
          >
         <div className="sm:flex sm:flex-col"> 
+        <div className="flex flex-row justify-end text-lg hover:text-red-600 hover:text-bold">
+        <button type="button" onClick={() => handleDelete(index)}>X</button>
+        </div>
         <label htmlFor="question" className="font-serif">Question:  </label>
         <input className="rounded-lg w-1/2 mt-2 sm:w-4/5"  
                type="text" 
