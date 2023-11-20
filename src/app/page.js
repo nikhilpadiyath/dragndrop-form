@@ -9,6 +9,12 @@ import { DndContext,
         useSensors,} from '@dnd-kit/core'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { createPortal } from 'react-dom'
+import { Roboto } from 'next/font/google'
+ 
+const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin'],
+})
 
 export default function Home() {
 
@@ -16,7 +22,7 @@ export default function Home() {
       name: '',
       email: '',
     })
-
+    const [darkMode, setDarkMode] = useState(false)
     const [showOptions, setShowOptions] = useState(false)
     const [addDiv, setAddDiv] = useState([{divs:"", id:100, optionStatus: showOptions}])
     const [activeDiv, setActiveDiv] = useState(null)
@@ -139,10 +145,12 @@ export default function Home() {
           sensors={sensors}
           id={myId}
           >
-    <div className="flex min-h-screen flex-col items-center p-10">
+    <main className= {darkMode ? "dark" : ""}>
+    <div className="flex min-h-screen flex-col items-center p-10 dark:text-white dark:bg-slate-900">
        <div className="flex flex-col items-center">
+          <button type="button" className="bg-slate-700 p-2 rounded mb-6 mt-3  text-white" onClick={()=> setDarkMode(!darkMode)}>Dark/Light Mode</button>
           <h1 className="text-4xl pb-6 font-bold text-green-700">Samskara</h1>
-          <h1 className="text-2xl pb-6 font-bold ">Create a new Event</h1>
+          <h1 className="text-2xl pb-6 font-bold dark:text-white ">General Queries</h1>
         <div className="flex">
         <div className="p-2">
         <label htmlFor="name">Name:  </label>
@@ -170,7 +178,7 @@ export default function Home() {
        </div>
 
             <div className=" w-full flex flex-col items-center">
-      <p className="p-2 m-2 font-semibold font-serif text-center">Feel free to add some additional questions to our participants!!!</p>
+      <p className="p-2 m-2 text-lg text-center">Feel free to add some additional questions to our participants!!!</p>
       
       <button onClick={handleFirst} className={showDiv ? "hidden" : "bg-slate-800 text-white h-1/4 w-1/3 rounded-md"}>Add your questions</button>
 
@@ -198,6 +206,7 @@ export default function Home() {
        </SortableContext> 
        </div>
       </div>
+      </main>
      {/*} {createPortal(
         <DragOverlay>
           {activeDiv && (
