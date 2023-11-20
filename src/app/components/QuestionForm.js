@@ -85,16 +85,16 @@ let {query} = question
           </div>
           <div className="flex space-around mt-4 sm:flex-col">
         <label className="mt-3" htmlFor="data-type">Answer Type:  </label>
-        <select className="h-8 ml-2 mt-4 sm:w-20 text-xs border-2 border-slate-400 dark:border-2 dark:border-slate-400 dark:bg-slate-600 dark:text-white rounded-xl w-40 focus:outline-none focus:ring focus:ring-slate-600" name="data-type" id="data-type" onChange={handleSelect}>
+        <select className="h-8 ml-2 mt-4 sm:w-50 text-xs border-2 border-slate-400 dark:border-2 dark:border-slate-400 dark:bg-slate-600 dark:text-white rounded-xl w-40 focus:outline-none focus:ring focus:ring-slate-600" name="data-type" id="data-type" onChange={handleSelect}>
             {options.map(option => (
               <option key={option.value} value={option.value}>{option.label}</option>
     
             ))}
         </select>
         {showOptions && (
-        <div className="ml-6 ">
-          <h3>Options: </h3>
-          <input className="rounded sm:w-3/4 border-2 border-slate-400 dark:border-2 dark:border-slate-300 dark:bg-slate-600 focus:outline-none focus:ring focus:ring-slate-600" type='text' name='options'/>
+        <div className="ml-6 sm:ml-0">
+          <h3 className="mt-3">Options: </h3>
+          <input className="rounded sm:w-7/8 border-2 border-slate-400 dark:border-2 dark:border-slate-300 dark:bg-slate-600 focus:outline-none focus:ring focus:ring-slate-600" type='text' name='options'/>
         </div>
         )}
         </div>
