@@ -17,12 +17,12 @@ export default function Home() {
       email: '',
     })
 
-    const [num,setNum] = useState(1)
     const [showOptions, setShowOptions] = useState(false)
-    const [addDiv, setAddDiv] = useState([{divs:"", id:100, p: num, optionStatus: showOptions}])
+    const [addDiv, setAddDiv] = useState([{divs:"", id:100, optionStatus: showOptions}])
     const [activeDiv, setActiveDiv] = useState(null)
     const [showDiv, setShowDiv] = useState(false)
     const [value,setValue] = useState('')
+    
 
     
     const {name,email} = formData;
@@ -50,7 +50,7 @@ export default function Home() {
     {label:"Multiple-select",value: 5}
   ]
   
-  let qList = []
+
     //For warning in console
     const myId = 1000
 
@@ -63,10 +63,7 @@ export default function Home() {
       })
     }
 
-    //Get Question
-    const getQuestion = (data) => {
-      qList.push(data)
-      }
+   
 
     //For handling dropdown list
    function handleSelect(e,index){
@@ -82,14 +79,17 @@ export default function Home() {
 
      //For creating new question fields
   function handleClick(){ 
-    setNum(num+1)
    
-    setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100),p: num+1, optionStatus:showOptions}])  
+    setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100),optionStatus:showOptions}])  
+
     }
 
     //To show the question panel
     function handleFirst(){
         setShowDiv(true)
+        if(addDiv.length === 0){
+        handleClick()
+        }
     }
 
   const handleDelete =(index) => {
@@ -97,9 +97,14 @@ export default function Home() {
     let currentId = addDiv[index].id
     console.log(currentId)
     const newList = addDiv.filter(item => item.id !== currentId)
-    //newList.splice(index,1)
-    setAddDiv(newList)
+   setAddDiv(newList)
+   if(newList.length === 0){
+    setShowDiv(false)
+   }else{
+    setShowDiv(true)
+   }
   }
+
 
     //*.........Drag and Drop functions............*
 
@@ -166,6 +171,7 @@ export default function Home() {
 
             <div className=" w-full flex flex-col items-center">
       <p className="p-2 m-2 font-semibold font-serif text-center">Feel free to add some additional questions to our participants!!!</p>
+      
       <button onClick={handleFirst} className={showDiv ? "hidden" : "bg-slate-800 text-white h-1/4 w-1/3 rounded-md"}>Add your questions</button>
 
       <SortableContext items={addDiv} strategy={verticalListSortingStrategy}>
@@ -178,11 +184,9 @@ export default function Home() {
                      index={index} 
                      addDiv={addDiv}
                      handleClick= {handleClick}
-                     num= {num}
                      options= {options}
                      handleSelect = {handleSelect} 
                      value = {value}
-                     getQuestion = {getQuestion}
                      showOptions = {showOptions}
                      handleDelete={handleDelete}
        />

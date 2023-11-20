@@ -2,9 +2,12 @@
 import {CSS} from '@dnd-kit/utilities'
 import { useSortable } from '@dnd-kit/sortable'
 import { useState } from 'react'
-const QuestionForm = ({index, addDiv,handleClick, options, handleSelect, getQuestion, showOptions, handleDelete}) => {
+const QuestionForm = ({index, addDiv,handleClick, options, handleSelect, showOptions, handleDelete}) => {
 
-  const [question, setQuestion] = useState("")
+  const [question, setQuestion] = useState({query:""})
+  const [qList, setQList] = useState([])
+  const [showText, setShowText] = useState(true)
+
   
    const { attributes, 
             listeners, 
@@ -31,9 +34,18 @@ const QuestionForm = ({index, addDiv,handleClick, options, handleSelect, getQues
   
  //For handling text in question fields
     function handleQuestion(e){
-      setQuestion(e.target.value) 
-      checkNumber(question)
-      }
+      setQuestion({query: e.target.value})     
+}
+
+let {query} = question
+ //Get Question
+ const getQuestion = (e) => {
+  if(e.key === "Enter"){
+  qList.push({query})
+ console.log("Question List:", qList)
+  setShowText(false)
+  } 
+   }
 
 
    return (
@@ -49,17 +61,20 @@ const QuestionForm = ({index, addDiv,handleClick, options, handleSelect, getQues
          className="w-full p-4 m-2 bg-slate-300 hover:bg-slate-400 hover:border-2 hover:border-rose-600 rounded-xl text-sm dark:text-slate-800 touch-none"
          >
         <div className="sm:flex sm:flex-col"> 
-        <div className="flex flex-row justify-end text-lg hover:text-red-600 hover:text-bold">
-        <button type="button" onClick={() => handleDelete(index)}>X</button>
+        <div className="flex flex-row justify-end hover:text-red-600 hover:text-bold">
+        <button type="button" onClick={() => handleDelete(index)}>x</button>
         </div>
         <label htmlFor="question" className="font-serif">Question:  </label>
         <input className="rounded-lg w-1/2 mt-2 sm:w-4/5 p-2"  
                type="text" 
                name="question"  
-               placeholder= {`Question ${addDiv[index].p}`}
-               value={question}
+               placeholder= {`Question ${index+1}`}
+               value={question.query}
                onChange={handleQuestion}
+               onKeyDown={getQuestion}
                ></input>
+               {showText && (
+               <p className="text-xs italic pt-2 text-red-600">**Press Enter to lock your question**</p>)}
           </div>
           <div className="flex space-around mt-4 sm:flex-col">
         <label className="mt-3 font-serif" htmlFor="data-type">Answer Type:  </label>
@@ -79,10 +94,7 @@ const QuestionForm = ({index, addDiv,handleClick, options, handleSelect, getQues
         {addDiv.length-1 === index &&
         (<button type='button' 
                   className="bg-slate-800 m-5 w-40 rounded-lg text-white text-sm sm:text-center hover:border-2 hover:border-rose-600" 
-                  onClick={function(event){
-                                        handleClick();
-                                        getQuestion();
-                                      }}
+                  onClick={handleClick}
          >Add Questions</button>)}
         </div>
         </div>
