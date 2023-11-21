@@ -23,11 +23,10 @@ export default function Home() {
       email: '',
     })
     const [darkMode, setDarkMode] = useState(false)
-    const [showOptions, setShowOptions] = useState(false)
-    const [addDiv, setAddDiv] = useState([{divs:"", id:100, optionStatus: showOptions}])
+    const [addDiv, setAddDiv] = useState([{divs:"", id:100}])
     const [activeDiv, setActiveDiv] = useState(null)
     const [showDiv, setShowDiv] = useState(false)
-    const [value,setValue] = useState('')
+    const [qList, setQList] = useState([])
     
 
     
@@ -69,24 +68,20 @@ export default function Home() {
       })
     }
 
-   
-
-    //For handling dropdown list
-   function handleSelect(e,index){
-    setValue(e.target.value)
-
-    if(e.target.value === '3' || e.target.value === '4' || e.target.value === '5'){
-      setShowOptions(true)
-    } else {
-      setShowOptions(false)
-    }
-    console.log(addDiv)
+     //Get Question
+  const updateQuestionList = (query) => {
+    console.log(qList);
+    console.log({query});
+    let newArray = [...qList, query];
+    console.log(newArray);
+    setQList(newArray);
   }
+
 
      //For creating new question fields
   function handleClick(){ 
    
-    setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100),optionStatus:showOptions}])  
+    setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100)}])  
 
     }
 
@@ -177,14 +172,14 @@ export default function Home() {
         </div>
        </div>
 
-            <div className=" w-full flex flex-col items-center">
+            <div className="w-5/6 flex flex-col items-center">
       <p className="p-2 m-2 text-lg text-center">Feel free to add some additional questions to our participants!!!</p>
       
       <button onClick={handleFirst} className={showDiv ? "hidden" : "bg-slate-800 text-white h-1/4 w-1/3 rounded-md"}>Add your questions</button>
 
       <SortableContext items={addDiv} strategy={verticalListSortingStrategy}>
       {showDiv && (
-      <div className="min-h-full">
+      <div className="min-h-full  w-full">
       {addDiv.map((singleDiv, index)=> 
        ( 
        
@@ -193,10 +188,8 @@ export default function Home() {
                      addDiv={addDiv}
                      handleClick= {handleClick}
                      options= {options}
-                     handleSelect = {handleSelect} 
-                     value = {value}
-                     showOptions = {showOptions}
                      handleDelete={handleDelete}
+                     updateQuestionList = {(query) => updateQuestionList(query)}
        />
       
        )
@@ -206,7 +199,7 @@ export default function Home() {
        </SortableContext> 
        </div>
       </div>
-      </main>
+</main>
      {/*} {createPortal(
         <DragOverlay>
           {activeDiv && (
