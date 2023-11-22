@@ -10,6 +10,7 @@ import { DndContext,
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { createPortal } from 'react-dom'
 import { Roboto } from 'next/font/google'
+import Link from 'next/link'
  
 const roboto = Roboto({
   weight: '400',
@@ -19,8 +20,8 @@ const roboto = Roboto({
 export default function Home() {
 
     const [formData, setFormData] = useState({
-      name: '',
-      email: '',
+      name: 'Nikhil',
+      email: 'nikhilpadiyath@gmail.com',
     })
     const [darkMode, setDarkMode] = useState(false)
     const [addDiv, setAddDiv] = useState([{divs:"", id:100}])
@@ -54,7 +55,7 @@ export default function Home() {
     {label:"Single-select", value: 4},
     {label:"Multiple-select",value: 5}
   ]
-  
+
 
     //For warning in console
     const myId = 1000
@@ -105,6 +106,7 @@ export default function Home() {
     setShowDiv(true)
    }
   }
+
 
 
     //*.........Drag and Drop functions............*
@@ -198,6 +200,17 @@ export default function Home() {
        )}
        </SortableContext> 
        </div>
+       <Link href={{
+      pathname: "/questions-overview",
+      query: {
+            name: formData.name,
+            email: formData.email,
+            qList: qList,
+            }
+  
+  }}>
+        <button type="submit" className="bg-slate-600 rounded-xl h-10 sm:h-6 w-20 mt-4 sm:mt-2 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600">Submit</button>
+      </Link>
       </div>
 </main>
      {/*} {createPortal(
