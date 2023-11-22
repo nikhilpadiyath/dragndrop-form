@@ -9,19 +9,14 @@ import { DndContext,
         useSensors,} from '@dnd-kit/core'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { createPortal } from 'react-dom'
-import { Roboto } from 'next/font/google'
 import Link from 'next/link'
  
-const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 export default function Home() {
 
     const [formData, setFormData] = useState({
-      name: 'Nikhil',
-      email: 'nikhilpadiyath@gmail.com',
+      name: '',
+      email: '',
     })
     const [darkMode, setDarkMode] = useState(false)
     const [addDiv, setAddDiv] = useState([{divs:"", id:100}])
@@ -71,10 +66,7 @@ export default function Home() {
 
      //Get Question
   const updateQuestionList = (query) => {
-    console.log(qList);
-    console.log({query});
     let newArray = [...qList, query];
-    console.log(newArray);
     setQList(newArray);
   }
 
@@ -145,12 +137,12 @@ export default function Home() {
     <main className= {darkMode ? "dark" : ""}>
     <div className="flex min-h-screen flex-col items-center p-10 dark:text-white dark:bg-slate-900">
        <div className="flex flex-col items-center">
-          <button type="button" className="bg-slate-700 p-2 rounded mb-6 mt-3  text-white" onClick={()=> setDarkMode(!darkMode)}>Dark/Light Mode</button>
+          <button type="button" className="bg-slate-800 p-2 rounded mb-6 mt-3  text-white" onClick={()=> setDarkMode(!darkMode)}>Dark/Light Mode</button>
           <h1 className="text-4xl pb-6 font-bold text-green-700">Samskara</h1>
           <h1 className="text-2xl pb-6 font-bold dark:text-white ">General Queries</h1>
         <div className="flex">
         <div className="p-2">
-        <label htmlFor="name">Name:  </label>
+        <label htmlFor="name">Admin Name:  </label>
         <input className="rounded-lg w-full p-2"  
                type="text" 
                name="name"  
@@ -161,7 +153,7 @@ export default function Home() {
                />
         </div>
         <div className="p-2 w-500">
-        <label htmlFor="email">Email:  </label>
+        <label htmlFor="email">Admin Email:  </label>
         <input className="rounded-lg w-full p-2" 
                type="email" 
                name="email"  
@@ -200,17 +192,22 @@ export default function Home() {
        )}
        </SortableContext> 
        </div>
+       
        <Link href={{
       pathname: "/questions-overview",
       query: {
+            darkMode: darkMode,
             name: formData.name,
             email: formData.email,
             qList: qList,
             }
   
   }}>
-        <button type="submit" className="bg-slate-600 rounded-xl h-10 sm:h-6 w-20 mt-4 sm:mt-2 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600">Submit</button>
-      </Link>
+    {qList.length !==0 &&(
+        <button type="submit" className="bg-slate-800 rounded-xl h-10 sm:h-6 w-20 mt-4 sm:mt-2 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600">Submit</button>
+        )}
+        </Link>
+   
       </div>
 </main>
      {/*} {createPortal(
