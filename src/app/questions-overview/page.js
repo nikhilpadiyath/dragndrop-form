@@ -1,6 +1,10 @@
+
 import Link from 'next/link'
 
-const questionsOverview = ({ searchParams }) => {
+
+const page = ({searchParams}) => {
+
+  
 
   const {name, email, qList, darkMode} = searchParams
   
@@ -9,7 +13,7 @@ return (
 
     <div className= {darkMode ? "dark" : ""}>
     <div className="bg-white  text-slate-800 dark:bg-slate-900 dark:text-slate-200 min-h-screen roboto flex flex-col flex-wrap m-4 p-4 font-semibold">
-      <h1 className="text-4xl pb-4">Questions Overview</h1>
+      <h1 className="text-4xl pb-4 text-center">Questions Overview</h1>
       <p>Event Head: {name}</p>
       <p>Contact me at {email}</p>
       <div className="m-4">
@@ -44,4 +48,4 @@ return (
   )
 }
 
-export default questionsOverview
+export default page

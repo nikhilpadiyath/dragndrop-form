@@ -10,6 +10,7 @@ import { DndContext,
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
+import Head from 'next/head'
  
 
 export default function Home() {

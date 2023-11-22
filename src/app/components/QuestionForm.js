@@ -71,7 +71,7 @@ function handleSelect(e,index){
         <button type="button" onClick={() => handleDelete(index)}>x</button>
         </div>
         <label htmlFor="question" className=" text-slate-700 font-semibold">Question:  </label>
-        <input className="rounded-xl w-1/2 mt-2 sm:w-4/5 sm:text-xs p-2 border-2 border-slate-400 dark:bg-slate-600 dark:text-white focus:outline-none focus:ring focus:ring-slate-600"  
+        <input className="rounded-xl w-1/2 mt-2 sm:w-4/5 sm:text-xs p-2 font-bold border-2 border-slate-400 dark:bg-slate-600 dark:text-white focus:outline-none focus:ring focus:ring-slate-600"  
                type="text" 
                name="question"  
                placeholder= {`Question ${index+1}`}
