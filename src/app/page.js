@@ -67,7 +67,7 @@ export default function Home() {
 
      //Get Question
   const updateQuestionList = ({query, optionTags}) => {
-   let newArray = [...qList, {query, optionTags}]
+    let newArray = [...qList, {query, optionTags}]
     setQList(newArray);   
     console.log('Question object',qList)
   }
@@ -143,13 +143,13 @@ export default function Home() {
     <main className= {darkMode ? "dark" : ""}>
     <div className={hidePanel ? "hidden" : "flex min-h-screen flex-col items-center p-10 dark:text-white dark:bg-slate-900"}>
        <div className="flex flex-col items-center">
-          <button type="button" className="bg-slate-800 p-2 rounded mb-6 mt-3  text-white" onClick={()=> setDarkMode(!darkMode)}>Dark/Light Mode</button>
-          <h1 className="text-4xl pb-6 font-bold text-green-700">Samskara</h1>
-          <h1 className="text-2xl pb-6 font-bold dark:text-white ">General Queries</h1>
+          <button type="button" className="bg-slate-800 p-2 rounded-xl mb-6 sm:mb-3 mt-3 sm:mt-1 sm:text-sm sm:h-8  text-white" onClick={()=> setDarkMode(!darkMode)}>Dark/Light Mode</button>
+          <h1 className="text-4xl sm:text-3xl pb-6 sm:pb-3 font-bold text-green-700">Samskara</h1>
+          <h1 className="text-2xl sm:text-xl pb-6 sm:pb-3 font-bold dark:text-white ">General Queries</h1>
         <div className="flex">
         <div className="p-2">
-        <label htmlFor="name">Admin Name:  </label>
-        <input className="rounded-lg w-full p-2"  
+        <label htmlFor="name" className="sm:text-sm">Admin Name:  </label>
+        <input className="rounded-lg w-full p-2 sm:h-8 sm:text-sm"  
                type="text" 
                name="name"  
                placeholder="Enter your name"
@@ -159,8 +159,8 @@ export default function Home() {
                />
         </div>
         <div className="p-2 w-500">
-        <label htmlFor="email">Admin Email:  </label>
-        <input className="rounded-lg w-full p-2" 
+        <label htmlFor="email" className="sm:text-sm">Admin Email:  </label>
+        <input className="rounded-lg w-full p-2 sm:h-8 sm:text-sm" 
                type="email" 
                name="email"  
                placeholder="Enter your email"
@@ -173,7 +173,7 @@ export default function Home() {
        </div>
 
             <div className="w-5/6 flex flex-col items-center">
-      <p className="p-2 m-2 text-lg text-center">Feel free to add some additional questions to our participants!!!</p>
+      <p className="p-2 m-2 text-lg text-center sm:text-sm">Feel free to add some additional questions to our participants!!!</p>
       
       <button onClick={handleFirst} className={showDiv ? "hidden" : "bg-slate-800 text-white h-1/4 w-1/3 rounded-md"}>Add your questions</button>
 

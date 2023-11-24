@@ -43,9 +43,13 @@ const QuestionForm = ({index, addDiv,handleClick, options, handleDelete, updateQ
 //Send each question to parent callback
 let {query, optionTags} = question
 const getQuestion =()=> {
+  if(question.query === ""){
+    alert('Please enter a question')
+  } else {
   updateTagList(tagList)
     updateQuestionList({query,optionTags: tagList})
     setIsButtonDisabled(true)
+  }
 } 
 
 //For handling dropdown list
@@ -83,7 +87,7 @@ function handleSelect(e,index){
         <button type="button" onClick={() => handleDelete(index)}>x</button>
         </div>
         <label htmlFor="question" className=" text-slate-700 font-semibold">Question:  </label>
-        <input className="rounded-xl w-1/2 mt-2 sm:w-4/5 sm:text-xs p-2 font-bold border-2 border-slate-400 dark:bg-slate-600 dark:text-white focus:outline-none focus:ring focus:ring-slate-600"  
+        <input className="rounded-xl w-1/2 mt-2 sm:w-4/5 sm:h-8 sm:text-xs p-2 font-bold border-2 border-slate-400 dark:bg-slate-600 dark:text-white focus:outline-none focus:ring focus:ring-slate-600"  
                type="text" 
                name="question"  
                placeholder= {`Question ${index+1}`}
@@ -91,13 +95,12 @@ function handleSelect(e,index){
                onChange={handleQuestion}
                
                ></input> 
-               <button type="button" onClick={getQuestion} className="bg-slate-800 rounded-xl h-10 sm:h-6 w-20 ml-4 sm:mt-2 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600 disabled:hover:none disabled:bg-slate-500" disabled={isButtonDisabled}>Save</button>
               </div>
           <div className="flex space-between mt-4 flex-col">
           <div>
         <label className="mt-3  text-slate-700  font-semibold" htmlFor="data-type">Answer Type:  </label>
         
-        <select className="h-8 ml-2 mt-4 sm:w-50 text-xs border-2 border-slate-400 dark:border-2 dark:border-slate-400 dark:bg-slate-600 dark:text-white rounded-xl w-40 focus:outline-none focus:ring focus:ring-slate-600" name="data-type" id="data-type" onChange={handleSelect}>
+        <select className="h-8 ml-2 mt-4 sm:w-50 sm:h-8 text-xs border-2 border-slate-400 dark:border-2 dark:border-slate-400 dark:bg-slate-600 dark:text-white rounded-xl w-40 focus:outline-none focus:ring focus:ring-slate-600" name="data-type" id="data-type" onChange={handleSelect}>
             {options.map(option => (
               <option key={option.value} value={option.value}>{option.label}</option>
     
@@ -109,13 +112,15 @@ function handleSelect(e,index){
      
         )}
         </div>
+        <button type="button" onClick={getQuestion} className="bg-slate-800 mt-2 rounded-xl h-10 sm:h-6 w-20 ml-4 sm:mt-4 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600 disabled:hover:none disabled:bg-slate-500" disabled={isButtonDisabled}>Save</button>
+
         </div>  
         {addDiv.length-1 === index &&
         (
         <div className="flex justify-center w-full p-4  h-15 border-t-0 border-2 border-slate-400 dark:border-2 dark:border-slate-400 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 hover:border-2 hover:border-slate-600 hover:rounded-xl text-sm dark:text-white touch-none"
          >    
        <button type='button' 
-                  className="bg-slate-800 rounded-xl h-10 w-40  text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600" 
+                  className="bg-slate-800 rounded-xl h-10 w-40 sm:h-8 sm:text-sm sm:w-30 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600" 
                   onClick={handleClick}
          >Add Questions</button>
         </div> )}
