@@ -5,9 +5,11 @@ import OptionsPanel from './OptionsPanel'
  
 const QuestionForm = ({index, addDiv,handleClick, options, handleDelete, updateQuestionList}) => {
 
-  const [question, setQuestion] = useState({query:""})
+  const [tagList,setTagList] = useState([])
+  const [question, setQuestion] = useState({query:"", optionTags: null,})
   const [value,setValue] = useState('')
   const [showOptions, setShowOptions] = useState(false)
+ 
 
    const { attributes, 
             listeners, 
@@ -38,10 +40,11 @@ const QuestionForm = ({index, addDiv,handleClick, options, handleDelete, updateQ
 }
 
 //Send each question to parent callback
-let {query} = question
+let {query, optionTags} = question
 const getQuestion =()=> {
-    updateQuestionList(query);
-}
+  updateTagList(tagList)
+    updateQuestionList({query,optionTags: tagList})
+} 
 
 //For handling dropdown list
 function handleSelect(e,index){
@@ -53,6 +56,13 @@ function handleSelect(e,index){
         setShowOptions(false)
       }
     }
+
+  //Get Tags from OptionsPanel
+  const updateTagList = (input) => {
+    let tagArray = [...tagList, input]
+    setTagList(tagArray)  
+    setQuestion({...question, optionTags: tagList})
+  }
 
  return (
     <div ref= {setNodeRef} 
@@ -93,7 +103,7 @@ function handleSelect(e,index){
         </select>
         </div>
         {showOptions && (
-        <OptionsPanel />
+        <OptionsPanel updateTagList={updateTagList} />
      
         )}
         </div>

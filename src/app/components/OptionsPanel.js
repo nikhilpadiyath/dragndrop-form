@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const OptionsPanel = () => {
+const OptionsPanel = ({updateTagList}) => {
 
     const [optionInput, setOptionInput] = useState("")
     const [tags, setTags] = useState([])
@@ -20,13 +20,19 @@ const handleOptions = (e) => {
      if((key === 'Enter' || key=== ',') && trimmedInput.length && !tags.includes(trimmedInput)){
        e.preventDefault()
        setTags(prev => [...prev, trimmedInput])
+       getTagList()
        setOptionInput(' ')
      }
+     
    }
    
    //Delete a tag
    const deleteTag = (index) => {
    setTags(prev=> prev.filter((tag, i) => i !== index))
+    }
+
+    const getTagList= () => {
+      updateTagList(optionInput)
     }
 
 
@@ -42,8 +48,8 @@ const handleOptions = (e) => {
           placeholder='Press Enter/Comma for next option'
           onKeyDown={handleTags}
           onChange={handleOptions}/>
-    {tags.map((tag,index) => <div key={tag} className="bg-slate-800 flex justify-around pt-0.5 w-20 h-6 rounded-xl ml-1 mt-2 text-white text-center sm:text-xs">{tag}
-    <button className="pb-3" onClick={()=> deleteTag(index)}>x</button>
+    {tags.map((tag,index) => <div key={tag} className="bg-slate-800 flex w-auto p-4 justify-around pt-0.5 h-6 rounded-xl ml-1 mt-2 text-white text-center sm:text-xs">{tag}
+    <button className="pb-3 pl-3" onClick={()=> deleteTag(index)}>x</button>
     </div>)}
   </div>
   )

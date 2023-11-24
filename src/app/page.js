@@ -9,8 +9,7 @@ import { DndContext,
         useSensors,} from '@dnd-kit/core'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { createPortal } from 'react-dom'
-import Link from 'next/link'
-import Head from 'next/head'
+import QuestionOverview from './components/QuestionsOverview'
  
 
 export default function Home() {
@@ -24,6 +23,7 @@ export default function Home() {
     const [activeDiv, setActiveDiv] = useState(null)
     const [showDiv, setShowDiv] = useState(false)
     const [qList, setQList] = useState([])
+    const [hidePanel, setHidePanel] = useState(false)
     
 
     
@@ -66,9 +66,10 @@ export default function Home() {
     }
 
      //Get Question
-  const updateQuestionList = (query) => {
-    let newArray = [...qList, query];
-    setQList(newArray);
+  const updateQuestionList = ({query, optionTags}) => {
+   let newArray = [...qList, {query, optionTags}]
+    setQList(newArray);   
+    console.log('Question object',qList)
   }
 
 
@@ -98,6 +99,10 @@ export default function Home() {
    }else{
     setShowDiv(true)
    }
+  }
+
+  const handleSubmit =()=> {
+    setHidePanel(true)
   }
 
 
@@ -136,7 +141,7 @@ export default function Home() {
           id={myId}
           >
     <main className= {darkMode ? "dark" : ""}>
-    <div className="flex min-h-screen flex-col items-center p-10 dark:text-white dark:bg-slate-900">
+    <div className={hidePanel ? "hidden" : "flex min-h-screen flex-col items-center p-10 dark:text-white dark:bg-slate-900"}>
        <div className="flex flex-col items-center">
           <button type="button" className="bg-slate-800 p-2 rounded mb-6 mt-3  text-white" onClick={()=> setDarkMode(!darkMode)}>Dark/Light Mode</button>
           <h1 className="text-4xl pb-6 font-bold text-green-700">Samskara</h1>
@@ -193,22 +198,20 @@ export default function Home() {
        )}
        </SortableContext> 
        </div>
-       
-       <Link href={{
-      pathname: "/questions-overview",
-      query: {
-            darkMode: darkMode,
-            name: formData.name,
-            email: formData.email,
-            qList: qList,
-            }
-  
-  }}>
+      
     {qList.length !==0 &&(
-        <button type="submit" className="bg-slate-800 rounded-xl h-10 sm:h-6 w-20 mt-4 sm:mt-2 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600">Submit</button>
+        <button type="button" onClick= {handleSubmit} className="bg-slate-800 rounded-xl h-10 sm:h-6 w-20 mt-4 sm:mt-2 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600">Submit</button>
         )}
-        </Link>
    
+      </div>
+      <div className={hidePanel ? "": "hidden"}>
+        <QuestionOverview name={name} 
+                          email={email} 
+                          darkMode={darkMode} 
+                          qList={qList}
+                          hidePanel={hidePanel}
+                          setHidePanel= {setHidePanel}
+                          />
       </div>
 </main>
      {/*} {createPortal(
