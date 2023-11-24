@@ -86,7 +86,7 @@ function handleSelect(e,index){
         <div className="flex flex-row justify-end dark:text-white hover:text-red-600 hover:text-bold">
         <button type="button" onClick={() => handleDelete(index)}>x</button>
         </div>
-        <label htmlFor="question" className=" text-slate-700 font-semibold">Question:  </label>
+        <label htmlFor="question" className=" text-slate-700 dark:text-slate-200 font-semibold">Question:  </label>
         <input className="rounded-xl w-1/2 mt-2 sm:w-4/5 sm:h-8 sm:text-xs p-2 font-bold border-2 border-slate-400 dark:bg-slate-600 dark:text-white focus:outline-none focus:ring focus:ring-slate-600"  
                type="text" 
                name="question"  
@@ -98,7 +98,7 @@ function handleSelect(e,index){
               </div>
           <div className="flex space-between mt-4 flex-col">
           <div>
-        <label className="mt-3  text-slate-700  font-semibold" htmlFor="data-type">Answer Type:  </label>
+        <label className="mt-3  text-slate-700 dark:text-slate-200 font-semibold" htmlFor="data-type">Answer Type:  </label>
         
         <select className="h-8 ml-2 mt-4 sm:w-50 sm:h-8 text-xs border-2 border-slate-400 dark:border-2 dark:border-slate-400 dark:bg-slate-600 dark:text-white rounded-xl w-40 focus:outline-none focus:ring focus:ring-slate-600" name="data-type" id="data-type" onChange={handleSelect}>
             {options.map(option => (
