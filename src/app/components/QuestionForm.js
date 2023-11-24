@@ -9,6 +9,7 @@ const QuestionForm = ({index, addDiv,handleClick, options, handleDelete, updateQ
   const [question, setQuestion] = useState({query:"", optionTags: null,})
   const [value,setValue] = useState('')
   const [showOptions, setShowOptions] = useState(false)
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
  
 
    const { attributes, 
@@ -36,7 +37,7 @@ const QuestionForm = ({index, addDiv,handleClick, options, handleDelete, updateQ
   
  //For handling text in question fields
     function handleQuestion(e){
-      setQuestion({query: e.target.value})     
+      setQuestion({query: e.target.value})  
 }
 
 //Send each question to parent callback
@@ -44,6 +45,7 @@ let {query, optionTags} = question
 const getQuestion =()=> {
   updateTagList(tagList)
     updateQuestionList({query,optionTags: tagList})
+    setIsButtonDisabled(true)
 } 
 
 //For handling dropdown list
@@ -89,7 +91,7 @@ function handleSelect(e,index){
                onChange={handleQuestion}
                
                ></input> 
-               <button type="button" onClick={getQuestion} className="bg-slate-800 rounded-xl h-10 sm:h-6 w-20 ml-4 sm:mt-2 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600" >Save</button>
+               <button type="button" onClick={getQuestion} className="bg-slate-800 rounded-xl h-10 sm:h-6 w-20 ml-4 sm:mt-2 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600 disabled:hover:none disabled:bg-slate-500" disabled={isButtonDisabled}>Save</button>
               </div>
           <div className="flex space-between mt-4 flex-col">
           <div>

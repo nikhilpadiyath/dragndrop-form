@@ -23,33 +23,38 @@ return (
       <label htmlFor="50+" className="m-4">50+</label>
       </div>
 
-     {/*} <ul>
+    {qList.optionTags === null ?
+
+      (<ul>
         {qList.map((item,index) => (
           <>
-        <li className=" w-3/4 bg-slate-800 border-2 border:slate-900 dark:border-slate-200 rounded-3xl p-4" 
+        <li className=" w-3/4  text-slate-300 dark:text-slate-950 bg-slate-800 border-2 border:slate-900 dark:border-slate-200 rounded-3xl p-4" 
             key={index}>{item.query}</li>
          <input className= "w-3/4 mt-4 mb-8 border-2 border-slate-200 rounded text-slate-800" 
                 type="text" 
                 name="answer" 
-                disabled></input>
+                placeholder="Your answer here"
+                ></input>
          </>
         ))}
-        </ul>*/}
-      <ul>
+        </ul>) :
+      (<ul>
         {qList.map((item,index) => (
           <>
         <li className=" w-3/4 text-slate-300 dark:text-slate-950 bg-slate-800 border-2 border:slate-900 dark:border-slate-200 rounded-3xl p-4" 
             key={item.query}>{item.query}</li>
-         {item.optionTags.map((tag,tagIndex) => (
+         {item.optionTags?.map((tag,tagIndex) => (
           <>
-         <input className= "my-4" type="checkbox" name="answer" key={tag}></input>
+         <input className= "my-4" type="checkbox" name="answer" key={tagIndex}></input>
          <label htmlFor="options" className="m-4">{tag}</label>
          </>))}
          </>
         ))}
          </ul>
+      )}
 
       </div>
+         
       <div>
         <button type="button" 
                 onClick={()=>setHidePanel(!hidePanel)}
