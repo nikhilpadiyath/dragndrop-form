@@ -64,7 +64,7 @@ return (
       <div>
         <button type="button" 
                 onClick={()=>setHidePanel(!hidePanel)}
-                className="bg-slate-800 rounded-xl h-10 sm:h-6 w-1/4 mt-4 sm:mt-2 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600"
+                className="bg-slate-800 rounded-xl h-10 sm:h-6 w-1/4 sm:w-2/3 mt-4 sm:mt-2 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600"
                 >Back to Create Questions
                 </button>
       </div>

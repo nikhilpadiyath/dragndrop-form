@@ -121,14 +121,14 @@ function handleSelect(e,index){
         </div>  
         {addDiv.length-1 === index &&
         (
-        <div className="flex justify-around w-full p-4 font-semibold h-15 border-t-0 border-2 border-slate-400 dark:border-2 dark:border-slate-400 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 hover:border-2 hover:border-slate-600 hover:rounded-xl text-sm dark:text-white touch-none"
+        <div className="flex justify-around w-full p-4  font-semibold h-15 border-t-0 border-2 border-slate-400 dark:border-2 dark:border-slate-400 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 hover:border-2 hover:border-slate-600 hover:rounded-xl text-sm dark:text-white touch-none"
          >    
        <button type='button' 
-                  className="bg-slate-800 rounded-xl h-10 w-40 sm:h-8 sm:text-sm sm:w-30 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600" 
+                  className="bg-slate-800 rounded-xl sm:text-xs h-10 w-40 sm:h-8 sm:mr-1  sm:w-25 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600" 
                   onClick={getQuestion}
                   >Add Questions</button>
 
-        <button type="button" onClick= {handleSubmit} className="bg-slate-800 rounded-xl h-10 w-40 sm:h-8 sm:text-sm sm:w-30 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600">Save & Submit</button>
+        <button type="button" onClick= {handleSubmit} className="bg-slate-800 rounded-xl h-10 w-40 sm:h-8 sm:text-xs sm:w-25 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600">Save & Submit</button>
         
         </div> )}
         </div>
