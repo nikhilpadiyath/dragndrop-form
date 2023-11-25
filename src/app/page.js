@@ -46,10 +46,9 @@ export default function Home() {
 
   const options = [
     {label:"Text", value: 1},
-    {label:"Number", value: 2},
-    {label:"Checkbox", value: 3},
-    {label:"Single-select", value: 4},
-    {label:"Multiple-select",value: 5}
+    {label:"Checkbox", value: 2},
+    {label:"Single-select", value: 3},
+    {label:"Multiple-select",value: 4}
   ]
 
 
@@ -74,11 +73,11 @@ export default function Home() {
 
 
      //For creating new question fields
-  function handleClick(){ 
+ // function handleClick(){ 
    
-    setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100)}])  
+    //setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100)}])  
 
-    }
+    //}
 
     //To show the question panel
     function handleFirst(){
@@ -100,11 +99,6 @@ export default function Home() {
     setShowDiv(true)
    }
   }
-
-  const handleSubmit =()=> {
-    setHidePanel(true)
-  }
-
 
 
     //*.........Drag and Drop functions............*
@@ -186,9 +180,10 @@ export default function Home() {
        <QuestionForm key={addDiv[index].id}  
                      index={index} 
                      addDiv={addDiv}
-                     handleClick= {handleClick}
+                     setAddDiv={setAddDiv}
                      options= {options}
                      handleDelete={handleDelete}
+                     setHidePanel ={setHidePanel}
                      updateQuestionList = {(query) => updateQuestionList(query)}
        />
       
@@ -199,16 +194,13 @@ export default function Home() {
        </SortableContext> 
        </div>
       
-    {qList.length !==0 &&(
-        <button type="button" onClick= {handleSubmit} className="bg-slate-800 rounded-xl h-10 sm:h-6 w-20 mt-4 sm:mt-2 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600">Submit</button>
-        )}
    
       </div>
       <div className={hidePanel ? "": "hidden"}>
         <QuestionOverview name={name} 
                           email={email} 
                           darkMode={darkMode} 
-                          qList={qList}
+                          qList = {qList}
                           hidePanel={hidePanel}
                           setHidePanel= {setHidePanel}
                           />

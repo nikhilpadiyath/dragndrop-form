@@ -37,7 +37,7 @@ const handleOptions = (e) => {
 
 
   return (
-    <div className="flex flex-wrap mt-4">
+    <div className="flex flex-wrap">
           
     <label htmlFor="options" className="mt-3  text-slate-700 font-semibold">Options:  </label>
     
