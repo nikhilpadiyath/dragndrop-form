@@ -199,6 +199,7 @@ export default function Home() {
       <div className={hidePanel ? "": "hidden"}>
         <QuestionOverview name={name} 
                           email={email} 
+                          addDiv={addDiv}
                           darkMode={darkMode} 
                           qList = {qList}
                           hidePanel={hidePanel}

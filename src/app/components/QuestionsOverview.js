@@ -1,5 +1,5 @@
 
-function QuestionOverview({name, email,darkMode,qList, hidePanel, setHidePanel}) {
+function QuestionOverview({name, email,darkMode,addDiv,qList, hidePanel, setHidePanel}) {
 
 
 return (
@@ -14,7 +14,7 @@ return (
       <label className="sm:text-sm" htmlFor="participantName">Name:</label>
       <input className= "w-1/2 sm:w-3/4 border-2 sm:h-6 border-slate-200 rounded text-slate-800 ml-2 mb-4"type="text" name="participant" disabled></input>
       <div className="border-2 border-slate-200 rounded p-2">
-      <p className="w-3/4 sm:text-sm sm:h-8 sm:p-2 mt-2 text-slate-300 bg-slate-700 border-2 border:slate-900 dark:border-slate-200 rounded-3xl p-4">What is your age group?</p>
+      <p className="w-2/3 sm:text-sm h-12 text-center sm:h-8 sm:p-2 mt-1 text-slate-200 bg-slate-700 border-2 border:slate-900 dark:border-slate-200 rounded-3xl py-3">What is your age group?</p>
       <div className="flex sm:text-sm">
       <input type="radio" name="age-group" />
       <label htmlFor="18-35" className="m-4">18-35</label>
@@ -25,19 +25,19 @@ return (
       </div>
       </div>
 
-    {qList.optionTags === null ?
+    {(qList.optionTags === null) ?
 
       (<ul>
         {qList.map((item,index) =>  (
           <>
           <div className="border-2 border-slate-200 rounded p-2">
-        <li className=" w-3/4 sm:text-sm sm:h-8 sm:p-2 mt-2 text-slate-300 bg-slate-700 border-2 border:slate-900 dark:border-slate-200 rounded-3xl p-4" 
+        <li className=" w-2/3 sm:text-sm h-12 text-center sm:h-8 sm:p-2 mt-1 text-slate-200 bg-slate-700 border-2 border:slate-900 dark:border-slate-200 rounded-3xl py-3" 
             key={index}>{item.query}</li>
-         <input className= "w-3/4 mt-4 mb-8 border-2 border-slate-200 rounded text-slate-800" 
+         <textarea className= "w-3/4 mt-4 mb-8 border-2 border-slate-200 rounded text-slate-800" 
                 type="text" 
                 name="answer" 
                 placeholder="Your answer here"
-                ></input>
+                ></textarea>
          </div>
          </>
         ))}
@@ -46,7 +46,7 @@ return (
         {qList.map((item,index) => (
           <>
           <div className="border-2 border-slate-200 rounded p-2">
-        <li className=" w-3/4 sm:text-sm sm:h-8 sm:p-2 mt-2 text-slate-300 bg-slate-700 border-2 border:slate-900 dark:border-slate-200 rounded-3xl p-4" 
+        <li className=" w-2/3 sm:text-sm h-12 text-center sm:h-8 sm:p-2 mt-1 text-slate-200 bg-slate-700 border-2 border:slate-900 dark:border-slate-200 rounded-3xl py-3" 
             key={index}>{item.query}</li>
          {item.optionTags?.map((tag,tagIndex) => (
           <>
@@ -63,7 +63,9 @@ return (
          
       <div>
         <button type="button" 
-                onClick={()=>setHidePanel(!hidePanel)}
+                onClick={()=>{
+                  addDiv.pop()
+                  setHidePanel(!hidePanel)}}
                 className="bg-slate-800 rounded-xl h-10 sm:h-6 w-1/4 sm:w-2/3 mt-4 sm:mt-2 text-bold text-white text-sm sm:text-center hover:border-2 hover:ring-slate-600"
                 >Back to Create Questions
                 </button>

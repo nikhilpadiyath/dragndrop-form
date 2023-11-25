@@ -69,7 +69,7 @@ function handleSelect(e,index){
     setQuestion({...question, optionTags: tagList})
   }
 
-  const handleSubmit =()=> {
+  const handleSubmit =(prev)=> {
     getQuestion()
     setHidePanel(true)
   }

@@ -17,7 +17,7 @@ const handleOptions = (e) => {
      const { key } = e
      const trimmedInput = optionInput.trim()
    
-     if(key === 'Enter' && trimmedInput.length && !tags.includes(trimmedInput)){
+     if((key === 'Enter' || key=== ',') && trimmedInput.length && !tags.includes(trimmedInput)){
        e.preventDefault()
        setTags(prev => [...prev, trimmedInput])
        getTagList()
