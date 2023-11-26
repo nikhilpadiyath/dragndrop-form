@@ -3,10 +3,10 @@ import { useSortable } from '@dnd-kit/sortable'
 import { useState } from 'react'
 import OptionsPanel from './OptionsPanel'
  
-const QuestionForm = ({index, addDiv,setAddDiv, options, handleDelete, setHidePanel,updateQuestionList}) => {
+const QuestionForm = ({index, addDiv,setAddDiv,qList, options, handleDelete, setHidePanel,updateQuestionList, updateValue}) => {
 
   const [tagList,setTagList] = useState([])
-  const [question, setQuestion] = useState({query:"", optionTags: null,})
+  const [question, setQuestion] = useState({query:"", optionTags: null, dropDown: "1"})
   const [value,setValue] = useState('')
   const [showOptions, setShowOptions] = useState(false)
  
@@ -39,37 +39,46 @@ const QuestionForm = ({index, addDiv,setAddDiv, options, handleDelete, setHidePa
       setQuestion({query: e.target.value})  
 }
 
-//Send each question to parent callback
-let {query, optionTags} = question
-const getQuestion =()=> {
-  if(question.query === ""){
-    alert('Please enter a question')
-  } else {
-  updateTagList(tagList)
-    updateQuestionList({query,optionTags: tagList})
-  }
-  setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100)}])
-} 
-
+let ddValue
 //For handling dropdown list
 function handleSelect(e,index){
    setValue(e.target.value)
-  
+   ddValue = e.target.value
+   setQuestion({...question,dropDown:ddValue})
       if(e.target.value === '2' || e.target.value === '3' || e.target.value === '4'){
         setShowOptions(true)
       } else {
         setShowOptions(false)
       }
+  
     }
 
+const getValue = (val) => {
+  
+}
+
+    
+//Send each question to parent callback
+let {query, optionTags, dropDown} = question
+const getQuestion =()=> {
+  if(question.query === ""){
+    alert('Please enter a question')
+  } else {
+  updateTagList(tagList)
+  updateQuestionList({query,optionTags: tagList,dropDown})
+  }
+  setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100)}])
+} 
+
+let tagArray =[]
   //Get Tags from OptionsPanel
   const updateTagList = (input) => {
-    let tagArray = [...tagList, input]
+    tagArray = [...tagArray, input]
     setTagList(tagArray)  
     setQuestion({...question, optionTags: tagList})
-  }
+  } 
 
-  const handleSubmit =(prev)=> {
+  const handleSubmit =()=> {
     getQuestion()
     setHidePanel(true)
   }
@@ -91,7 +100,7 @@ function handleSelect(e,index){
         <button type="button" onClick={() => handleDelete(index)}>x</button>
         </div>
         <label htmlFor="question" className=" text-slate-700 dark:text-slate-200 font-semibold">Question:  </label>
-        <input className="rounded-xl w-1/2 mt-2 sm:w-4/5 sm:h-8 sm:text-xs p-2 font-bold border-2 border-slate-400 dark:bg-slate-600 dark:text-white focus:outline-none focus:ring focus:ring-slate-600"  
+        <input className="rounded-xl w-1/2 mt-2 sm:w-4/5 sm:h-8 sm:text-xs p-2 font-bold border-2 border-slate-400 bg-slate-200 dark:bg-slate-300 text-slate-800 focus:outline-none focus:ring focus:ring-slate-600"  
                type="text" 
                name="question"  
                placeholder= {`Question ${index+1}`}

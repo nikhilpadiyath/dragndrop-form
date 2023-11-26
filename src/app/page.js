@@ -18,6 +18,7 @@ export default function Home() {
       name: '',
       email: '',
     })
+    
     const [darkMode, setDarkMode] = useState(false)
     const [addDiv, setAddDiv] = useState([{divs:"", id:100}])
     const [activeDiv, setActiveDiv] = useState(null)
@@ -65,25 +66,20 @@ export default function Home() {
     }
 
      //Get Question
-  const updateQuestionList = ({query, optionTags}) => {
-    let newArray = [...qList, {query, optionTags}]
+  const updateQuestionList = ({query, optionTags, dropDown}) => {
+    let newArray = [...qList, {query, optionTags, dropDown}]
     setQList(newArray);   
     console.log('Question object',qList)
   }
 
 
-     //For creating new question fields
- // function handleClick(){ 
-   
-    //setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100)}])  
-
-    //}
-
     //To show the question panel
     function handleFirst(){
         setShowDiv(true)
+        
         if(addDiv.length === 0){
-        handleClick()
+          setShowDiv(false)
+          setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100)}])  
         }
     }
 
@@ -135,7 +131,7 @@ export default function Home() {
           id={myId}
           >
     <main className= {darkMode ? "dark" : ""}>
-    <div className={hidePanel ? "hidden" : "flex min-h-screen flex-col items-center p-10 dark:text-white dark:bg-slate-900"}>
+    <div className={hidePanel ? "hidden" : "flex min-h-screen flex-col items-center p-10 bg-gradient-to-white from-slate-500 text-black dark:text-white dark:bg-slate-900"}>
        <div className="flex flex-col items-center">
           <button type="button" className="bg-slate-800 p-2 rounded-xl mb-6 sm:mb-3 mt-3 sm:mt-1 sm:text-sm sm:h-8  text-white" onClick={()=> setDarkMode(!darkMode)}>Dark/Light Mode</button>
           <h1 className="text-4xl sm:text-3xl pb-6 sm:pb-3 font-bold text-green-700">Samskara</h1>
@@ -143,7 +139,7 @@ export default function Home() {
         <div className="flex">
         <div className="p-2">
         <label htmlFor="name" className="sm:text-sm">Admin Name:  </label>
-        <input className="rounded-lg w-full p-2 sm:h-8 sm:text-sm"  
+        <input className="rounded-lg w-full p-2 sm:h-8 sm:text-sm text-slate-700 dark:text-slate-200 font-semibold"  
                type="text" 
                name="name"  
                placeholder="Enter your name"
@@ -154,7 +150,7 @@ export default function Home() {
         </div>
         <div className="p-2 w-500">
         <label htmlFor="email" className="sm:text-sm">Admin Email:  </label>
-        <input className="rounded-lg w-full p-2 sm:h-8 sm:text-sm" 
+        <input className="rounded-lg w-full p-2 sm:h-8 sm:text-sm text-slate-700 dark:text-slate-200 font-semibold" 
                type="email" 
                name="email"  
                placeholder="Enter your email"
@@ -169,7 +165,7 @@ export default function Home() {
             <div className="w-5/6 flex flex-col items-center">
       <p className="p-2 m-2 text-lg text-center sm:text-sm">Feel free to add some additional questions to our participants!!!</p>
       
-      <button onClick={handleFirst} className={showDiv ? "hidden" : "bg-slate-800 text-white h-1/4 w-1/3 rounded-md"}>Add your questions</button>
+      <button onClick={handleFirst} className={showDiv ? "hidden" : "bg-slate-800 text-white sm:text-sm h-1/4 sm:h-8 w-1/3 sm:w-1/2 rounded-xl"}>Add your questions</button>
 
       <SortableContext items={addDiv} strategy={verticalListSortingStrategy}>
       {showDiv && (
@@ -180,11 +176,13 @@ export default function Home() {
        <QuestionForm key={addDiv[index].id}  
                      index={index} 
                      addDiv={addDiv}
+                     qList={qList}
                      setAddDiv={setAddDiv}
                      options= {options}
                      handleDelete={handleDelete}
                      setHidePanel ={setHidePanel}
                      updateQuestionList = {(query) => updateQuestionList(query)}
+                     updateValue = {(value) => updateValue(value)}
        />
       
        )
@@ -206,7 +204,7 @@ export default function Home() {
                           setHidePanel= {setHidePanel}
                           />
       </div>
-</main>
+      </main>
      {/*} {createPortal(
         <DragOverlay>
           {activeDiv && (
