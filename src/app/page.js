@@ -131,7 +131,7 @@ export default function Home() {
           id={myId}
           >
     <main className= {darkMode ? "dark" : ""}>
-    <div className={hidePanel ? "hidden" : "flex min-h-screen flex-col items-center p-10 bg-gradient-to-white from-slate-500 text-black dark:text-white dark:bg-slate-900"}>
+    <div className={hidePanel ? "hidden" : "flex min-h-screen flex-col items-center p-10 bg-slate-300  text-black dark:text-white dark:bg-slate-900"}>
        <div className="flex flex-col items-center">
           <button type="button" className="bg-slate-800 p-2 rounded-xl mb-6 sm:mb-3 mt-3 sm:mt-1 sm:text-sm sm:h-8  text-white" onClick={()=> setDarkMode(!darkMode)}>Dark/Light Mode</button>
           <h1 className="text-4xl sm:text-3xl pb-6 sm:pb-3 font-bold text-green-700">Samskara</h1>

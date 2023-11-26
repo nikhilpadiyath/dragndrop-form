@@ -5,7 +5,7 @@ const OptionsPanel = ({updateTagList}) => {
     const [optionInput, setOptionInput] = useState("")
     const [tags, setTags] = useState([])
 
-    
+   
 //Handle the option input field
 const handleOptions = (e) => {
     const optionValue = e.target.value
@@ -19,8 +19,10 @@ const handleOptions = (e) => {
      if((e.key === 'Enter' || e.keyCode === 13) && trimmedInput.length && !tags.includes(trimmedInput)){
        e.preventDefault()
        setTags(prev => [...prev, trimmedInput])
-       getTagList()
+      
        setOptionInput("")
+       
+       getTagList(tags)
      }
      
    }
@@ -30,8 +32,9 @@ const handleOptions = (e) => {
    setTags(prev=> prev.filter((tag, i) => i !== index))
     }
 
-    const getTagList= () => {
-      updateTagList(optionInput)
+    const getTagList= (tags) => {
+      updateTagList(tags)
+  
     }
 
 

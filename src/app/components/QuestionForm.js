@@ -57,6 +57,7 @@ const getValue = (val) => {
   
 }
 
+let tagArray
     
 //Send each question to parent callback
 let {query, optionTags, dropDown} = question
@@ -65,17 +66,16 @@ const getQuestion =()=> {
     alert('Please enter a question')
   } else {
   updateTagList(tagList)
-  updateQuestionList({query,optionTags: tagList,dropDown})
+  updateQuestionList({query, optionTags, dropDown})
   }
   setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100)}])
 } 
 
-let tagArray =[]
   //Get Tags from OptionsPanel
   const updateTagList = (input) => {
-    tagArray = [...tagArray, input]
-    setTagList(tagArray)  
-    setQuestion({...question, optionTags: tagList})
+    setTagList(()=>input.map(item=>tagList.push(item)))
+   setQuestion({...question, optionTags:tagList})
+   console.log('Question',tagList)
   } 
 
   const handleSubmit =()=> {
