@@ -18,6 +18,7 @@ const handleOptions = (e) => {
 
      if((e.key === 'Enter' || e.keyCode === 13) && trimmedInput.length && !tags.includes(trimmedInput)){
        e.preventDefault()
+       console.log("Key Event", e)
        setTags(prev => [...prev, trimmedInput])
       
        setOptionInput("")
