@@ -21,21 +21,19 @@ const handleOptions = (e) => {
        setTags(prev => [...prev, trimmedInput])
       
        setOptionInput("")
-       
-       getTagList(tags)
-     }
-     
+       getTag(trimmedInput)
+       }  
    }
    
    //Delete a tag
    const deleteTag = (index) => {
    setTags(prev=> prev.filter((tag, i) => i !== index))
+   getTag()
     }
 
-    const getTagList= (tags) => {
-      updateTagList(tags)
-  
-    }
+ const getTag = (input) => {
+   updateTagList(input)
+ }
 
 
   return (

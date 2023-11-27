@@ -14,6 +14,8 @@ function QuestionOverview({name, email,darkMode,addDiv,qList, hidePanel, setHide
     console.log("Question in Overview", qList)
   }
 
+  let answer = ""
+
 return (
   <main className= {darkMode ? "dark" : ""}>
     <div className="bg-white  text-slate-800 dark:bg-slate-900 dark:text-slate-200 min-h-screen roboto flex flex-col flex-wrap m-4 p-4 font-semibold">
@@ -41,12 +43,13 @@ return (
       <ul>
         {qList.map((item,index) =>  (
           
-          qList[index].optionTags.length === 0 ?
+          qList[index].answerType === undefined || null ?
           
           (<>
             <div className="border-2 border-slate-200 rounded p-2">
         <li className=" w-2/3 sm:text-sm h-12 text-center sm:h-8 sm:p-2 mt-1 text-slate-200 bg-slate-700 border-2 border:slate-900 dark:border-slate-200 rounded-3xl py-3" 
             key={index}>{item.query}</li>
+        <span className="h-8 ml-2 mt-4 pt-1  sm:mt-2  sm:w-20 sm:h-6 sm:text-xs border-2 border-slate-400 dark:border-2 dark:border-slate-400 dark:bg-slate-600 dark:text-white rounded-xl w-40 focus:outline-none focus:ring focus:ring-slate-600">Text</span>
          <input className= "w-5/6 h-8 p-2 mt-4 mb-4 border-2 border-slate-200 rounded text-slate-800 text-sm" 
                 type="text" 
                 name="answer" 
@@ -58,8 +61,11 @@ return (
 
           (<>
           <div className="border-2 border-slate-200 rounded p-2">
+            <div className="flex justify-around text-center">
         <li className=" w-2/3 sm:text-sm h-12 text-center sm:h-8 sm:p-2 mt-1 text-slate-200 bg-slate-700 border-2 border:slate-900 dark:border-slate-200 rounded-3xl py-3" 
             key={index}>{item.query}</li>
+        <span className="h-8 ml-2 mt-4 pt-1 sm:mt-2 sm:w-20 sm:h-6 sm:text-xs border-2 border-slate-400 dark:border-2 dark:border-slate-400 dark:bg-slate-600 dark:text-white rounded-xl w-40 focus:outline-none focus:ring focus:ring-slate-600">Checkbox</span>
+        </div>
          {item.optionTags?.map((tag,tagIndex) => (
           <>
          <input className= "my-4 sm:text-sm" type="checkbox" name="answer" key={tagIndex}></input>

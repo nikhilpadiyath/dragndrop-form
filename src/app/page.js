@@ -65,9 +65,12 @@ export default function Home() {
       })
     }
 
-     //Get Question
-  const updateQuestionList = ({query, optionTags, dropDown}) => {
-    let newArray = [...qList, {query, optionTags, dropDown}]
+    
+
+
+    //Get Question
+  const updateQuestionList = ({query, optionTags, answerType}) => {
+    let newArray = [...qList, {query, optionTags, answerType}]
     setQList(newArray);   
     console.log('Question object',qList)
   }

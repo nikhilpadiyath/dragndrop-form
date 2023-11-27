@@ -5,10 +5,10 @@ import OptionsPanel from './OptionsPanel'
  
 const QuestionForm = ({index, addDiv,setAddDiv,qList, options, handleDelete, setHidePanel,updateQuestionList, updateValue}) => {
 
-  const [tagList,setTagList] = useState([])
-  const [question, setQuestion] = useState({query:"", optionTags: null, dropDown: "1"})
-  const [value,setValue] = useState('')
+  const [question, setQuestion] = useState({query:"", optionTags: null, answerType: "1"})
+  const [answerValue,setAnswerValue] = useState('')
   const [showOptions, setShowOptions] = useState(false)
+  const [tagList, setTagList] = useState([])
  
 
    const { attributes, 
@@ -39,47 +39,50 @@ const QuestionForm = ({index, addDiv,setAddDiv,qList, options, handleDelete, set
       setQuestion({query: e.target.value})  
 }
 
-let ddValue
-//For handling dropdown list
+
+//For handling answerType list
 function handleSelect(e,index){
-   setValue(e.target.value)
-   ddValue = e.target.value
-   setQuestion({...question,dropDown:ddValue})
+   setAnswerValue(e.target.value)
+   let ddValue = e.target.value
+   
       if(e.target.value === '2' || e.target.value === '3' || e.target.value === '4'){
         setShowOptions(true)
       } else {
         setShowOptions(false)
+        ddValue = '1'
       }
+      question.answerType = ddValue
   
     }
 
-const getValue = (val) => {
-  
-}
-
-let tagArray
+  //Get Tags from OptionsPanel
+  const updateTagList = (input) => {
+    console.log("Input",input)
+   if(input){
+   let tagArray = [...tagList,input]
+   setTagList(tagArray)
+   setQuestion({...question, optionTags: tagArray})
+   } else{
+   question.optionTags = []
+   }
+  } 
     
 //Send each question to parent callback
-let {query, optionTags, dropDown} = question
+let {query, optionTags, answerType} = question
 const getQuestion =()=> {
   if(question.query === ""){
     alert('Please enter a question')
   } else {
-  updateTagList(tagList)
-  updateQuestionList({query, optionTags, dropDown})
+  updateTagList(question.optionTags)
+  updateQuestionList({query, optionTags, answerType})
   }
   setAddDiv([...addDiv, {divs:"", id:Math.floor(Math.random() * 100)}])
 } 
 
-  //Get Tags from OptionsPanel
-  const updateTagList = (input) => {
-    setTagList(()=>input.map(item=>tagList.push(item)))
-   setQuestion({...question, optionTags:tagList})
-   console.log('Question',tagList)
-  } 
-
   const handleSubmit =()=> {
     getQuestion()
+    updateTagList()
+    
     setHidePanel(true)
   }
 
