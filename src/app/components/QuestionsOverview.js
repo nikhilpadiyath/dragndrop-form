@@ -27,7 +27,10 @@ return (
       <label className="sm:text-sm" htmlFor="participantName">Name:</label>
       <input className= "w-1/2 sm:w-3/4 border-2 sm:h-6 border-slate-200 rounded text-slate-800 ml-2 mb-4 text-sm p-2"type="text" name="participant" placeholder="Participant's Name"></input>
       <div className="border-2 border-slate-200 rounded p-2">
+      <div className="flex flex-wrap justify-around text-center">
       <p className="w-2/3 sm:text-sm h-12 text-center sm:h-8 sm:p-2 mt-1 text-slate-200 bg-slate-700 border-2 border:slate-900 dark:border-slate-200 rounded-3xl py-3">What is your age group?</p>
+      <span className="h-8 ml-2 mt-4 pt-1  sm:mt-2  sm:w-20 sm:h-6 sm:text-xs border-2 border-slate-400 dark:border-2 dark:border-slate-400 dark:bg-slate-600 dark:text-white rounded-xl w-40 focus:outline-none focus:ring focus:ring-slate-600">Single-select</span>
+      </div>
       <div className="flex sm:text-sm">
       <input type="radio" name="age-group" />
       <label htmlFor="18-35" className="m-4">18-35</label>
@@ -47,9 +50,11 @@ return (
           
           (<>
             <div className="border-2 border-slate-200 rounded p-2">
+              <div className="flex flex-wrap justify-around text-center">
         <li className=" w-2/3 sm:text-sm h-12 text-center sm:h-8 sm:p-2 mt-1 text-slate-200 bg-slate-700 border-2 border:slate-900 dark:border-slate-200 rounded-3xl py-3" 
             key={index}>{item.query}</li>
         <span className="h-8 ml-2 mt-4 pt-1  sm:mt-2  sm:w-20 sm:h-6 sm:text-xs border-2 border-slate-400 dark:border-2 dark:border-slate-400 dark:bg-slate-600 dark:text-white rounded-xl w-40 focus:outline-none focus:ring focus:ring-slate-600">Text</span>
+         </div>
          <input className= "w-5/6 h-8 p-2 mt-4 mb-4 border-2 border-slate-200 rounded text-slate-800 text-sm" 
                 type="text" 
                 name="answer" 
@@ -61,7 +66,7 @@ return (
 
           (<>
           <div className="border-2 border-slate-200 rounded p-2">
-            <div className="flex justify-around text-center">
+            <div className="flex flex-wrap justify-around text-center">
         <li className=" w-2/3 sm:text-sm h-12 text-center sm:h-8 sm:p-2 mt-1 text-slate-200 bg-slate-700 border-2 border:slate-900 dark:border-slate-200 rounded-3xl py-3" 
             key={index}>{item.query}</li>
         <span className="h-8 ml-2 mt-4 pt-1 sm:mt-2 sm:w-20 sm:h-6 sm:text-xs border-2 border-slate-400 dark:border-2 dark:border-slate-400 dark:bg-slate-600 dark:text-white rounded-xl w-40 focus:outline-none focus:ring focus:ring-slate-600">Checkbox</span>
